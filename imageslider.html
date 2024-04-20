@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ImageSlider</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        body {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            width: 500px;
+            height: 300px;
+            border: 2px solid black;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+        .main {
+            display: flex;
+            transition: all 0.5s ease-in;
+        }
+        img {
+            width: 500px;
+            height: 300px;
+        }
+        button {
+            position: absolute;
+            cursor: pointer;
+            border: none;
+            background-color: transparent;
+            font-size: 30px;
+            color: white;
+            opacity: 0.5;
+        }
+        button:hover {
+            opacity: 1;
+        }
+        #prev {
+            top: calc(500px / 4);
+            left: 10px;
+        }
+        #next {
+            top: calc(500px / 4);
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="main">
+            <img src="https://picsum.photos/id/237/200/100" alt="image">
+            <img src="https://picsum.photos/id/233/200/100" alt="image">
+            <img src="https://picsum.photos/id/234/200/100" alt="image">
+            <img src="https://picsum.photos/id/231/200/100" alt="image">
+            <img src="https://picsum.photos/id/236/200/100" alt="image">
+        </div>
+        <button type="submit" id="prev"><<</button>
+        <button type="submit" id="next">>></button>
+    </div>
+    <script>
+        let next = document.querySelector('#next');
+        let prev = document.querySelector('#prev');
+        let main = document.querySelector('.main');
+        let count = 0;
+
+        next.addEventListener('click',() => {
+            if(main.children.length > count + 1) {
+                count += 1;
+                main.style.transform = `TranslateX(${-count * 500}px)`;
+            }
+        });
+
+        prev.addEventListener('click',() => {
+            if(count > 0) {
+                count -= 1;
+                main.style.transform = `TranslateX(${-count * 500}px)`;
+            }
+        });
+    </script>
+</body>
+</html>

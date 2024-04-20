@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VideoPopUp</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        .container {
+            width: 100vw;
+            height: 100vh;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .content {
+            width: 50%;
+            height: 80%;
+        }
+        .video {
+            width: 100%;
+            height: 60%;
+        }
+        video {
+            width: 85%;
+        }
+        .text {
+            width: 100%;
+            height: 40%;
+        }
+        .heading {
+            width: 100%;
+            height: 20%;
+            font-size: 30px;
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+        .body {
+            width: 100%;
+            height: 50%;
+            color: white;
+            font-size: 20px;
+            line-height: 2rem;
+            word-spacing: 0.1rem;
+            padding-left: 2rem;
+        }
+        .button {
+            width: 100%;
+            height: 30%;
+            display: flex;
+            align-items: end;
+        }
+        button {
+            width: 8rem;
+            height: 2.5rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 20px;
+            background-color: orange;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: rgb(251, 201, 110);
+        }
+        .popup {
+            width: 100vw;
+            height: 100vh;
+            background-color: black;
+            padding: 2%;
+            display: none;
+        }
+        .box {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        .close {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            font-size: 25px;
+            cursor: pointer;
+        }
+        .play {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .play video {
+            width: 70%;
+            border: 2px solid white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <div class="video">
+                <video src="MySelfAR.mp4">Video</video>
+            </div>
+            <div class="text">
+                <div class="heading">
+                    <span>Portfolio</span>
+                </div>
+                <div class="body">
+                    <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet pariatur magni temporibus corporis numquam culpa, similique blanditiis excepturi repellendus? Veritatis, fuga ullam recusandae accusamus sed placeat obcaecati excepturi vitae numquam!</span>
+                </div>
+                <div class="button">
+                    <button type="submit" id="btn">Watch</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="popup">
+        <div class="box">
+            <div class="close"><span>❌</span></div>
+            <div class="play">
+                <video src="MySelfAR.mp4" controls autoplay>Video</video>
+            </div>
+        </div>
+    </div>
+    <script>
+        let btn = document.getElementById('btn');
+        let closeup = document.querySelector('.close');
+        let main = document.querySelector('.container');
+        let side = document.querySelector('.popup');
+
+        btn.addEventListener('click',function() {
+            main.style.display = 'none';
+            side.style.display = 'flex';
+        });
+
+        closeup.addEventListener('click',function() {
+            main.style.display = 'flex';
+            side.style.display = 'none';
+        });
+    </script>
+</body>
+</html>

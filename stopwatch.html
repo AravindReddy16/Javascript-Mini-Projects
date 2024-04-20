@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StopWatch</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        body {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .main-container {
+            width: 21rem;
+            height: 21rem;
+            border-radius: 50%;
+            background-color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 50px;
+        }
+        .container {
+            width: 20rem;
+            height: 20rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+        }
+        .counter {
+            font-size: 60px;
+        }
+        .inputbox {
+            display: none;
+        }
+        input {
+            width: 150px;
+            height: 50px;
+            border: 2px solid red;
+            outline-color: black;
+            border-radius: 5px;
+            padding: 0px 10px;
+            font-size: 20px;
+        }
+        .buttons {
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+        }
+        button {
+            width: 100px;
+            height: 40px;
+            cursor: pointer;
+            background-color: red;
+            border: 2px solid black;
+            font-size: 18px;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: rgb(183, 7, 7);
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="main-container">
+            <div class="container">
+                <div class="counter">
+                    <span id="seconds"></span>
+                </div>
+                <div class="inputbox">
+                    <input type="text" placeholder="Seconds" id="input">
+                </div>
+            </div>
+        </div>
+        <div class="audio">
+            <audio src="StopWatch.wav" id="audio" loop></audio>
+        </div>
+        <div class="buttons">
+            <button type="submit" id="start">Start</button>
+            <button type="submit" id="restart">Restart</button>
+        </div>
+    </div>
+    <script>
+        let main = document.querySelector('.main-container');
+        let count = document.querySelector('#seconds');
+        let counter = document.querySelector('.counter');
+        let input = document.querySelector('#input');
+        let inputbox = document.querySelector('.inputbox');
+        let start = document.querySelector('#start');
+        let restart = document.querySelector('#restart');
+        let sound = document.querySelector('#audio');
+        let isInput = false;
+        let timeout = false;
+        let isStart = false;
+        let timer;
+        let isSound = false;
+        let seconds = 60;
+        let constant = 60;
+        let constVar = 0;
+        count.innerHTML = `${seconds}s`;
+
+        restart.addEventListener('click',function() {
+            counter.style.display = 'none';
+            inputbox.style.display = 'flex';
+            main.style.backgroundImage = `conic-gradient(red ${0}deg,black 0deg)`;
+            isInput = true;
+            isStart = true;
+            settimer(isStart);
+            constVar = 0;
+        });
+
+        start.addEventListener('click',function() {
+            if(isInput == true) {
+                seconds = input.value;
+                constant = input.value;
+                input.value = '';
+                counter.style.display = 'flex';
+                inputbox.style.display = 'none';
+                isInput = false;
+                count.innerHTML = `${seconds}s`;
+                settimer(isStart);
+            }
+            else {
+                settimer(isStart);
+            }
+        });
+
+        function settimer(starter) {
+            if(starter == false) {
+                timer = setInterval(function() {
+                    if(seconds != 0) {
+                        seconds -= 1;
+                        count.innerHTML = `${seconds}s`;
+                        main.style.backgroundImage = `conic-gradient(red ${constVar += (360/constant)}deg,black 0deg)`;
+                    }
+                    else {
+                        isSound = true;
+                        soundPlay(isSound);
+                    }
+                },1000);
+                isStart = true;
+                start.innerHTML = 'Stop';
+            }
+            else {
+                clearInterval(timer);
+                isStart = false;
+                start.innerHTML = 'Start';
+                isSound = false;
+                soundPlay(isSound);
+            };
+        };
+
+        function soundPlay(sounds) {
+            if(sounds == true) {
+                sound.play();
+            }
+            else {
+                sound.pause();
+            }
+        }
+    </script>
+</body>
+</html>

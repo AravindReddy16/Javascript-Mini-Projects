@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ImageGenerator</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        body {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            width: 90%;
+            height: 90%;
+            background-color: aqua;
+            overflow: auto;
+            padding: 2rem 0rem;
+        }
+        .image {
+            margin-left: 7rem;
+            margin-bottom: 5rem;
+        }
+        .button {
+            text-align: center;
+        }
+        button {
+            width: 8rem;
+            height: 3rem;
+            border: 2px solid black;
+            border-radius: 5px;
+            background-color: greenyellow;
+            cursor: pointer;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box">
+        </div>
+        <div class="button">
+            <button type="submit" id="btn">More</button>
+        </div>
+    </div>
+    <script>
+        let box = document.querySelector('.box');
+        let btn = document.querySelector('#btn');
+
+        function randompic() {
+            for(i=0;i<7;i++) {
+                let rand = Math.ceil(Math.random()*100);
+                let pic = document.createElement('img');
+                pic.className = 'image';
+                pic.src = `https://picsum.photos/200/300?random=${rand}`;
+                box.append(pic);
+            };
+        };
+
+        randompic();
+
+        btn.addEventListener('click',() => {
+            randompic();
+        });
+    </script>
+</body>
+</html>

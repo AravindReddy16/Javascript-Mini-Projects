@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ColorGenerator</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        body {
+            padding: 4%;
+            width: 100vw;
+            height: 100vh;
+        }
+        .container {
+            width: 100%;
+            height: 100%;
+        }
+        .top {
+            width: 100%;
+            height: 60%;
+            display: flex;
+            justify-content: center;
+        }
+        .color-div {
+            width: 60%;
+            height: 90%;
+            border: 2px solid black;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 45px;
+        }
+        .bottom {
+            width: 100%;
+            height: 40%;
+        }
+        .b-top {
+            width: 100%;
+            height: 70%;
+            display: flex;
+            justify-content: space-between;
+        }
+        .test-color {
+            width: 20%;
+            height: 100%;
+            border: 2px solid black;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            cursor: pointer;
+        }
+        .b-bottom {
+            width: 100%;
+            height: 30%;
+            display: flex;
+            justify-content: center;
+            align-items: end;
+        }
+        button {
+            width: 10rem;
+            height: 2.5rem;
+            background-color: green;
+            border: none;
+            font-size: 18px;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: rgb(8, 168, 8);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="top">
+            <div class="color-div">Hello World !</div>
+        </div>
+        <div class="bottom">
+            <div class="b-top">
+            </div>
+            <div class="b-bottom">
+                <button type="submit" id="btn">More</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        let main = document.querySelector('.color-div')
+        let btn = document.querySelector('#btn');
+        let subcolor = document.querySelector('.b-top');
+
+        let arr = [0,1,2,3,4,5,6,7,8,9,'a','b','c','d','e','f'];
+
+        function randomColor() {
+            for(k=0;k<4;k++) {
+                let bgcolor = '';
+                for(i=0;i<6;i++) {
+                    let number = Math.floor(Math.random()*arr.length);
+                    bgcolor += arr[number];
+                };
+                let more = document.createElement('div');
+                more.className = 'test-color';
+                more.innerHTML = '#'+bgcolor;
+                more.style.backgroundColor = '#'+bgcolor;
+                subcolor.appendChild(more);
+                more.addEventListener('click',function() {
+                    main.style.backgroundColor = this.style.backgroundColor;
+                });
+            };
+        };
+
+        randomColor();
+
+        btn.addEventListener('click',function() {
+            subcolor.innerHTML = '';
+            randomColor();
+        });
+    </script>
+</body>
+</html>

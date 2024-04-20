@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript</title>
+</head>
+<body>
+    <h1>Javascript Tutorial</h1>
+    <div class="div-game">
+        <button onclick="playGame('rock')">Rock</button>
+        <button onclick="playGame('paper')">Paper</button>
+        <button onclick="playGame('scissor')">Scissor</button>
+        <p id="gameMoves"></p>
+        <p id="scoreBoard"></p>
+        <button onclick="resetGame()">Reset Score</button>
+    </div>
+    <script>
+        let score = {
+            wins:0,
+            looses:0,
+            ties:0,
+        };
+        function playGame(playerResult) {
+            let arr=['rock','paper','scissor'];
+            let computerResult;
+            let choice=Math.floor(Math.random()*3);
+            computerResult=arr[choice];
+            if (playerResult==='rock' && computerResult==='scissor' || playerResult==='paper' && computerResult==='rock' || playerResult==='scissor' && computerResult==='paper') {
+                score['wins']+=1;
+                document.getElementById('scoreBoard').innerHTML=`Player Wins.\nWins: ${score['wins']} Looses: ${score['looses']} Ties: ${score['ties']}`
+                console.log(playerResult,computerResult);
+            }
+            else if (playerResult===computerResult) {
+                score['ties']+=1;
+                document.getElementById('scoreBoard').innerHTML=`Game Ties.\nWins: ${score['wins']} Looses: ${score['looses']} Ties: ${score['ties']}`
+                console.log(playerResult,computerResult);
+            }
+            else {
+                score['looses']+=1;
+                document.getElementById('scoreBoard').innerHTML=`Player Looses.\nWins: ${score['wins']} Looses: ${score['looses']} Ties: ${score['ties']}`
+                console.log(playerResult,computerResult);
+            }
+        };
+        function resetGame() {
+            score['wins']=0;
+            score['looses']=0;
+            score['ties']=0;
+            document.getElementById('scoreBoard').innerHTML=`Game Resets.\nWins: ${score['wins']} Looses: ${score['looses']} Ties: ${score['ties']}`
+        }
+    </script>
+</body>
+</html>

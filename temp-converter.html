@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Convertor</title>
+    <style>
+        body {
+            background-color: aquamarine;
+        }
+        .container {
+            background-color: white;
+            width: 600px;
+            height: 300px;
+            margin: 150px 0px 0px 450px;
+            box-shadow: 5px 5px 10px 3px;
+        }
+        .container:hover {
+            transform: scale(1.1,1.1);
+        }
+        .header {
+            text-align: center;
+            padding-top: 0.1px;
+            color: rgb(210, 75, 96);
+        }
+        .radiobtn {
+            background-color: aqua;
+            width: 570px;
+            height: 50px;
+            margin-left: 15px;
+        }
+        .radiobtn label {
+            color: red;
+        }
+        .btn {
+            float: left;
+            margin-left: 130px;
+            margin-top: 12px;
+            font-size: 20px;
+        }
+        .btn:hover {
+            transform: scale(1.1,1.1);
+        }
+        .tempinput {
+            background-color: aqua;
+            width: 570px;
+            height: 60px;
+            margin-top: 18px;
+            margin-left: 15px;
+        }
+        .tempinput input[type=number] {
+            margin-top: 12px;
+            width: 300px;
+            height: 30px;
+            margin-left: 100px;
+            border-radius: 5px 5px 5px 5px;
+            border-color: rgb(124, 203, 229);
+            border-width: 1px;
+            text-align: center;
+            color: rgb(241, 67, 105);
+            font-size: 15px;
+        }
+        .tempinput input[type=submit] {
+            width: 100px;
+            height: 30px;
+            border-radius: 5px 5px 5px 5px;
+            border-color: rgb(124, 203, 229);
+            border-width: 1px;
+            background-color: rgb(177, 57, 57);
+            color: white;
+        }
+        .tempoutput {
+            background-color: aqua;
+            width: 570px;
+            height: 55px;
+            margin-top: 18px;
+            margin-left: 15px;
+            text-align: center;
+            padding-top: 2px;
+            color: rgb(177, 57, 57);
+        }
+        p {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        const display = () => {
+            let temp=document.getElementsByName('temp')
+            let rate=''
+            for(val in temp){
+                if(temp[val].checked){
+                    rate=temp[val].value
+                }
+            }
+            let tempval=document.getElementById('temps')
+            if(rate=='foreignheat'){
+                let f=(tempval.value*(9/5))+32
+                document.getElementById('output').innerHTML=`Temperature in Fohrenheit: ${f} F`
+            }
+            else if(rate=='celsius'){
+                let c=(tempval.value-32)*(5/9)
+                document.getElementById('output').innerHTML=`Temperature in Celsius: ${c} C`
+            }
+        }
+    </script>
+    <div class="container">
+        <div class="header">
+            <h1>Temperature Convertor</h1>
+        </div>
+        <div class="radiobtn">
+            <div class="btn">
+                <label><input type="radio" name="temp" value="celsius">Celsius</label>
+            </div>
+            <div class="btn">
+                <label><input type="radio" name="temp" value="foreignheat">Fahrenheit</label><br>
+            </div>    
+        </div>
+        <div class="tempinput">
+            <input type="number" placeholder="Teperature..." id="temps">
+            <input type="submit" value="Convert" onclick="display()">
+        </div>
+        <div class="tempoutput">
+            <p id="output"></p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        body {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            width: 30%;
+            height: 50%;
+            background-color: aqua;
+            padding: 2%;
+        }
+        input[type=text] {
+            width: 70%;
+            height: 2rem;
+            padding: 0px 1rem;
+            background-color: bisque;
+            border: none;
+        }
+        #button {
+            width: 25%;
+            height: 2rem;
+            background-color: bisque;
+        }
+        #menu li {
+            list-style-type: none;
+            background-color: aquamarine;
+            width: 100%;
+            height: 30px;
+            margin-top: 15px;
+            font-size: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <input type="text" id="todo" placeholder="Enter">
+        <button type="submit" id="button">Add</button>
+        <ul id="menu"></ul>
+    </div>
+    <script>
+        let txt = document.getElementById('todo');
+        let btn = document.getElementById('button');
+        let menu = document.getElementById('menu');
+
+        btn.addEventListener('click',function() {
+            let item = document.createElement('li');
+            let deletebtn = document.createElement('button');
+            let cancelbtn = document.createElement('button');
+            let cross = true;
+            
+            deletebtn.textContent = 'Delete';
+            cancelbtn.textContent = 'Cancel';
+            item.textContent = `${txt.value}`;
+            menu.append(item);
+            item.append(deletebtn,cancelbtn);
+            txt.value = '';
+            deletebtn.addEventListener('click',function() {
+                menu.removeChild(this.parentNode);
+            });
+            cancelbtn.addEventListener('click',function() {
+                if(cross == true) {
+                    this.parentNode.style.textDecoration = 'line-through';
+                    cross = false;
+                }
+                else {
+                    this.parentNode.style.textDecoration = 'none';
+                    cross = true;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

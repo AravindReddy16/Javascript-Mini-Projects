@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WordCounter</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        body {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            width: 40%;
+            height: 30%;
+            background-color: greenyellow;
+            border: 2px solid black;
+            border-radius: 10px;
+            padding: 1%;
+        }
+        .heading {
+            width: 100%;
+            height: 20%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 25px;
+        }
+        .inputbox {
+            width: 100%;
+            height: 60%;
+        }
+        textarea {
+            width: 100%;
+            height: 100%;
+            resize: none;
+            padding: 2%;
+            line-height: 20px;
+            font-size: 17px;
+            border: 2px solid black;
+            background-color: greenyellow;
+            color: black;
+        }
+        textarea::placeholder {
+            color: black;
+        }
+        .readings {
+            width: 100%;
+            height: 20%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0px 20px;
+            font-size: 20px;
+        }
+        #count ,#remain {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="heading">Word-Counter</div>
+        <div class="inputbox">
+            <textarea placeholder="Text Here..." id="textbox"></textarea>
+        </div>
+        <div class="readings">
+            <span>Word Count: <span id="count">0</span></span>
+            <span>Remaining Space: <span id="remain">70</span></span>
+        </div>
+    </div>
+    <script>
+        let input = document.querySelector('#textbox');
+        let count = document.querySelector('#count');
+        let remain = document.querySelector('#remain');
+
+        function wordLength() {
+            count.innerHTML = `${input.value.length}`;
+            remainCount = 70 - input.value.length;
+            remain.innerHTML = `${remainCount}`;
+            input.maxLength = 70;
+        }
+
+        input.addEventListener('input',function() {
+            wordLength();
+        });
+    </script>
+</body>
+</html>
